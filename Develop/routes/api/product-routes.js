@@ -8,7 +8,9 @@ router.get('/', async (req, res) => {
   try {
     // find all products
     // be sure to include its associated Category and Tag data
-    const productData = await Product.findAll();
+    const productData = await Product.findAll({
+      include: [{ model: Category }, { model: Tag }]
+    });
     res.status(200).json(productData)
   } catch (err) {
     res.status(500).json(err)
@@ -17,19 +19,32 @@ router.get('/', async (req, res) => {
 });
 
 // get one product
-router.get('/:id', (req, res) => {
-  // find a single product by its `id`
-  // be sure to include its associated Category and Tag data
+router.get('/:id', async (req, res) => {
+  try {
+    // find a single product by its `id`
+    // be sure to include its associated Category and Tag data
+    const productData = await Product.findByPk(req.params.id, {
+      include: [{ model: Category }, { model: Tag }]
+    })
+    res.status(200).json(productData)
+  } catch (err) {
+    res.status(500).json(err)
+  }
 });
 
 // create new product
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
+  const productData = await Product.create({
+    where: {
+      product_name: req.body.product_name,
+      price: req.body.price,
+      stock: req.body.stock,
+      tagIds: req.body.
+    }
+  })
   /* req.body should look like this...
     {
-      product_name: "Basketball",
-      price: 200.00,
-      stock: 3,
-      tagIds: [1, 2, 3, 4]
+
     }
   */
   Product.create(req.body)
