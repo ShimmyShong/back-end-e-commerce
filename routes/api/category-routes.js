@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Category, Product } = require('../../models');
+const { update } = require('../../models/Product');
 
 // The `/api/categories` endpoint
 
@@ -42,10 +43,17 @@ router.put('/:id', async (req, res) => {
   try {
     // update a category by its `id` value
     const categoryData = await Category.findByPk(req.params.id)
-    await categoryData.update()
-    await categoryData.save();
-
-    res.json(categoryData)
+    const updateCategory = await Category.update(
+      {
+        category_name: req.body.category_name
+      },
+      {
+        where:
+        {
+          id: categoryData.id
+        }
+      })
+    res.json(updateCategory)
   } catch (err) {
     res.status(500).json(err)
   }
