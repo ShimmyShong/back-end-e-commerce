@@ -1,5 +1,9 @@
 # E-Commerce Backend [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+
+https://github.com/ShimmyShong/back-end-e-commerce/assets/123122824/9b658a99-2c7c-482b-baf4-980bf88d435c
+
+
 ## Description
 This is a backend of an e-commerce website that utilizes sequelize databases and express routing to create many tables with relationships between them. I learned a lot about the importance of different server requests while making this project!
 ## Table of Contents
